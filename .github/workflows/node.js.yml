@@ -27,7 +27,9 @@ jobs:
           echo "FLAG=$FLAG" >> $GITHUB_OUTPUT
       - name: install dependencies
         run: npm install
-      - name: implement test file with env
-        run: node test
+      - name: build
+        run: npm run build
         env:
           FLAG: ${{steps.makeVar.outputs.FLAG}}
+      - name: implement test file with env
+        run: node dist/bundle
