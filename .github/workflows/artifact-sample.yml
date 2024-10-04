@@ -28,7 +28,7 @@ jobs:
           path: sample
       - shell: bash
         run: |
-          cd /sample
+          cd sample
           ls
           cat math-homework.txt
           value=`cat math-homework.txt`
