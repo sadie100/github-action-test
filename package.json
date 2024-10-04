@@ -1,0 +1,14 @@
+{
+  "name": "github-action-test",
+  "version": "1.0.0",
+  "description": "github action test project",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
