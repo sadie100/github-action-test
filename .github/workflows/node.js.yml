@@ -33,28 +33,26 @@ jobs:
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$SUMMARY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+
       - name: upload sample artifact
+        id: artifact-upload
         uses: actions/upload-artifact@v4
         with:
           name: first
           path: sample-greeting.txt
+
       - name: upload second artifact
         uses: actions/upload-artifact@v4
         with:
           name: second
           path: sample-another-text.txt
-      - name: Get artifact download URL
-        id: artifact-url
-        run: |
-          ARTIFACT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          echo "url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
       - name: Post coverage comment
         uses: actions/github-script@v7
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const summary = `${{ steps.coverage-summary.outputs.summary }}`;
-            const artifactUrl = '${{ steps.artifact-url.outputs.url }}';
+            const artifactUrl = '${{ steps.artifact-upload.outputs.artifact-url }}';
 
             github.rest.issues.createComment({
               issue_number: context.payload.pull_request.number,
