@@ -7,6 +7,7 @@ import codeCoverageTask from "@cypress/code-coverage/task";
 import { devServer } from "@cypress/vite-dev-server";
 import { defineConfig } from "cypress";
 import { mergeConfig, loadEnv } from "vite";
+const { cloudPlugin } = require("cypress-cloud/plugin");
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
@@ -126,6 +127,7 @@ module.exports = defineConfig({
       });
 
       codeCoverageTask(on, config);
+      cloudPlugin(on, config);
       return config;
     },
   },
