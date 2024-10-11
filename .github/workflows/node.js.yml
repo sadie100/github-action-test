@@ -55,9 +55,8 @@ jobs:
             const summary = `${{ steps.coverage-summary.outputs.summary }}`;
             const artifactUrl = '${{ steps.artifact-url.outputs.url }}';
 
-            console.log(artifactUrl)
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.name,
               body: `Coverage summary:\n\`\`\`\n${summary}\n\`\`\`\n\nDownload full results: ${artifactUrl}`
