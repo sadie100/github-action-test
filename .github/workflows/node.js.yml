@@ -48,7 +48,7 @@ jobs:
           ARTIFACT_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           echo "url=$ARTIFACT_URL" >> $GITHUB_OUTPUT
       - name: Post coverage comment
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
