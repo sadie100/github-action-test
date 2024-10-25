@@ -11,6 +11,8 @@ jobs:
     name: Add 3 and 7
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - shell: bash
         run: |
           expr 3 + 7 > math-homework.txt
