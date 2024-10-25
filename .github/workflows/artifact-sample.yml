@@ -1,6 +1,8 @@
 name: Share data between jobs
 
-on: []
+on:
+  pull_request:
+    branches: ["main"]
 
 jobs:
   job_1:
@@ -15,6 +17,11 @@ jobs:
         with:
           name: homework_pre
           path: math-homework.txt
+      - name: Upload nested directory
+        uses: actions/upload-artifact@v4
+        with:
+          name: nested
+          path: some-directory/
 
   job_2:
     name: Multiply by 9
