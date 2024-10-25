@@ -1,6 +1,8 @@
 name: Share data between jobs
 
 on:
+  push:
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
