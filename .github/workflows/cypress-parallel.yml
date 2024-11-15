@@ -1,0 +1,32 @@
+name: Cypress parallel test
+
+on:
+  push:
+    branches: ["cypress-parallel"]
+
+jobs:
+  build-cypress-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      - id: set-matrix
+        run: echo "specs=$(node cypress/support/locateCypressSpecsToRun.js)" >> $GITHUB_OUTPUT
+    outputs:
+      specs: ${{ steps.set-matrix.outputs.specs }}
+
+  regression:
+    needs: [build-cypress-matrix]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 64
+      matrix:
+        specs: ${{ fromJson(needs.build-cypress-matrix.outputs.specs) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          spec: ${{ matrix.specs }}

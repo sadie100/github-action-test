@@ -1,11 +1,9 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: get file info and create issue comment by github-script
 
-on:
-  pull_request:
-    branches: ["main"]
+on: workflow_call
 
 jobs:
   upload-artifact-and-comment:
@@ -18,7 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
       - name: make env variable
         id: makeVar
         run: |
